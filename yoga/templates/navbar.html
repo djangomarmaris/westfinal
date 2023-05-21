@@ -1,0 +1,138 @@
+{% load static i18n %}
+<div class="ft-preloader active">
+        <div class="ft-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ft-child ft-bounce1"></div>
+            <div class="ft-child ft-bounce2"></div>
+            <div class="ft-child ft-bounce3"></div>
+        </div>
+    </div>
+<div class="wrapper">
+        <!-- Header Start -->
+        <header class="header">
+            <div class="header__inner fixed-header">
+                <div class="header__main">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="header__main-inner">
+                                    <div class="header__main-left">
+                                        <div class="logo">
+                                            <a href="index.html" class="logo--normal">
+                                                <img width="50" src="{% static 'westlast.png' %}" alt="Logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="header__main-center">
+                                        <nav class="main-navigation text-center d-none d-lg-block">
+                                            <ul class="mainmenu">
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="/" class="mainmenu__link">
+                                                        <span class="mm-text">Ana Sayfa</span>
+                                                    </a>
+                                                </li>
+                                                <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                                    <a href="shop.html" class="mainmenu__link">
+                                                        <span class="mm-text">Ürün</span>
+                                                    </a>
+                                                    <ul class="megamenu">
+                                                        <li>
+                                                            {% for product in cate %}
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="{{product.get_absolute_url}}">
+                                                                        <span class="mm-text">{{product.name}}</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                            {% endfor %}
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="/blog/list/" class="mainmenu__link">
+                                                        <span class="mm-text">Blog</span>
+                                                    </a>
+                                                </li>
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="#" class="mainmenu__link">
+                                                        <span class="mm-text">Katalog</span>
+                                                    </a>
+                                                    <ul class="sub-menu">
+                                                        {% for product in done %}
+                                                        <li>
+                                                            <a target="_blank" href="{{product.kvvk.url}}">
+                                                                <span class="mm-text">{{product.name}}</span>
+                                                            </a>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+                                                </li>
+                                                <li class="mainmenu__item">
+                                                    <a href="/contact/" class="mainmenu__link">
+                                                        <span class="mm-text">İletişim</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="header__main-right">
+                                        <div class="header-toolbar-wrap">
+                                            <div class="header-toolbar">
+
+                                                <!--div class="header-toolbar__item header-toolbar--search-btn">
+                                                    <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
+                                                        <i class="la la-search"></i>
+                                                    </a>
+                                                </div-->
+                                                {% if request.user.is_authenticated %}
+                                                 {% with total_items=cart|length %}
+                                                    {% if cart|length > 0 %}
+                                                     <div class="header-toolbar__item header-toolbar--minicart-btn">
+                                                        <a href="/user/login/" class="header-toolbar__btn toolbar-btn">
+                                                            <p style="font-size:15px;">{{request.user.first_name}} |</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="header-toolbar__item header-toolbar--minicart-btn">
+                                                        <a href="#miniCart" class="header-toolbar__btn toolbar-btn">
+                                                            <i class="la la-shopping-cart"></i>
+                                                            <span>{{cart|length}}</span>
+                                                        </a>
+                                                    </div>
+                                                 {% else %}
+                                                    <div class="header-toolbar__item header-toolbar--minicart-btn">
+                                                        <a class="header-toolbar__btn">
+                                                            <p style="font-size:15px;">Bayi : {{request.user.first_name}}</p>
+                                                        </a>
+                                                    </div>
+                                                 {% endif %}
+                                                {% endwith %}
+                                                {% else %}
+                                                <div class="header-toolbar__item header-toolbar--minicart-btn">
+                                                        <a href="/user/login/" class="header-toolbar__btn">
+                                                            <i class="la la-user"></i>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="header-toolbar__item d-block d-lg-none">
+                                                    <a href="#offcanvasMenu" class="header-toolbar__btn toolbar-btn menu-btn">
+                                                        <div class="hamburger-icon">
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>

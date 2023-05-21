@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block seo %}
+    <title>Ödeme Şeçenekleri</title>
+{% endblock %}
+{% block content %}
+
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">Cart</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Home</a></li>
+                            <li class="current"><span>Cart</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<form action="." method="post" class="form form--checkout">
+ <div class="main-content-wrapper">
+            <div class="page-content-inner pt--80 pt-md--60 pb--72 pb-md--60">
+                <div class="container">
+                    <div class="row">
+                        <!-- Checkout Area Start -->
+                        <div class="col-lg-6">
+                            <div class="checkout-title mt--10">
+                                <h2>Sevk Bilgileri</h2>
+                            </div>
+                            <div class="checkout-form">
+
+                                    {% csrf_token %}
+                                    <div class="row mb--20">
+                                        <div class="form__group col-md-6 mb-sm--30">
+                                            <label class="form__label">İsminiz  <span class="required">*</span></label>
+                                            <input type="text" name="first_name" class="form__input" placeholder="Exp : Cemal">
+                                        </div>
+                                        <div class="form__group col-md-6">
+                                            <label class="form__label">Soyisminiz  <span class="required">*</span></label>
+                                            <input type="text" name="last_name" class="form__input" placeholder="Exp : Şahin ">
+                                        </div>
+                                    </div>
+                                    <div class="row mb--20">
+                                        <div class="form__group col-md-6 mb-sm--30">
+                                            <label class="form__label">Telefon  <span class="required">*</span></label>
+                                            <input type="text" name="phone" class="form__input" placeholder="05XXXXXXXXX">
+                                        </div>
+                                        <div class="form__group col-md-6">
+                                            <label class="form__label">Email  <span class="required">*</span></label>
+                                            <input type="text" name="email" class="form__input" placeholder="Exp : exp@mail.com">
+                                        </div>
+                                    </div>
+                                    <div class="row mb--20">
+                                        <div class="form__group col-md-6 mb-sm--30">
+                                            <label class="form__label">Şehir  <span class="required">*</span></label>
+                                            <input type="text" name="city" class="form__input" placeholder="Exp : Muğla ">
+                                        </div>
+                                        <div class="form__group col-md-6">
+                                            <label class="form__label">T.C  <span class="required">*</span></label>
+                                            <input type="text" name="tc" class="form__input" placeholder="Exp : T.C 'niz">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb--20">
+                                        <div class="form__group col-12">
+                                            <label class="form__label">Teslimat Adresi  <span class="required">*</span></label>
+                                            <input type="text" name="adress" class="form__input" placeholder="Exp : Sevk Depo Adresi">
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 offset-xl-1 col-lg-6 mt-md--40">
+                            <div class="order-details">
+                                <div class="checkout-title mt--10">
+                                    <h2>Ürünler</h2>
+                                </div>
+                                <div class="table-content table-responsive mb--30">
+                                    <table class="table order-table order-table-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Ürün</th>
+                                                <th class="text-right">Fiyat</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in cart %}
+                                            <tr>
+                                                <th>{{ item.product }} X {{item.quantity}}
+                                                    <strong><span>&#10005;</span>1</strong>
+                                                </th>
+                                                <td class="text-right">₺ {{ item.total_price }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="order-total">
+                                                <th>Genel Toplam</th>
+                                                <td class="text-right"><span class="order-total-ammount">₺ {{ cart.get_total_price }}</span></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="checkout-payment">
+                                    <form action="#" class="payment-form">
+                                        <div class="payment-group mt--20">
+                                           <p><input class="btn btn-danger mee" type="submit" value="Alışverişi Tamamla"></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Checkout Area End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</form>
+<div class="offcanvas-menu-wrapper" id="offcanvasMenu">
+            <div class="offcanvas-menu-inner">
+                <a href="" class="btn-close">
+                    <i class="la la-remove"></i>
+                </a>
+                <nav class="offcanvas-navigation">
+                    <ul class="offcanvas-menu">
+                        <li class="menu-item-has-children active">
+                            <a href="#">Ana Sayfa</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="shop.html">Ürünler</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-has-children">
+                                    {% for product in cate %}
+                                    <a href="{{product.get_absolute_url}}">
+                                        <span class="mm-text">{{product.name}}</span>
+                                    </a>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/blog/list/">Blog</a>
+
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="#">Katalog</a>
+                            <ul class="sub-menu">
+                                {% for product in done %}
+                                <li>
+                                    <a target="_blank" href="{{product.kvvk.url}}">{{product.name}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/contact/">İletişim</a>
+                        </li>
+                    </ul>
+                    <div class="site-info vertical">
+                        <div class="site-info__item">
+                            <a href="tel:+01223566678"><strong>+01 2235 666 78</strong></a>
+                            <a href="mailto:Support@contixs.com">Support@furtrate.com</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- OffCanvas Menu End -->
+
+        {% if request.user.is_authenticated %}
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <div class="mini-cart__close">
+                    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+                </div>
+                <div class="mini-cart-inner">
+                    <h3 class="mini-cart__heading mb--45">Sepetim</h3>
+                    <div class="mini-cart__content">
+                        {% for item in cart %}
+                        <ul class="mini-cart__list">
+                            <li class="mini-cart__product">
+                                <div class="mini-cart__product-image">
+                                    <img src="{% if item.product.list_image %}{{ item.product.list_image.url }}{% else %}{% endif %}" alt="products">
+                                </div>
+                                <div class="mini-cart__product-content">
+                                    <a class="mini-cart__product-title" href="product-details.html">{{item.product.name}}.</a>
+                                    <span class="mini-cart__product-quantity">{{item.quantity}} x ₺ {{item.product.price}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                        <div class="mini-cart__total">
+                            <span>Genel Toplam</span>
+                            <span class="ammount">₺ {{ cart.get_total_price }}</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="/cart/" class="btn btn-fullwidth btn-bg-primary mb--20">Sepetim</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% else %}
+
+         {% endif %}
+        {% endwith %}
+        {% else %}
+        {% endif %}
+<div class="searchform__popup" id="searchForm">
+            <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+            <div class="searchform__body">
+                <p>Start typing and press Enter to search</p>
+                <form class="searchform">
+                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store...">
+                    <button type="submit" class="searchform__submit"><i class="la la-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock %}
+

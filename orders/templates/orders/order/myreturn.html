@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block seo %}
+    <title>İadelerim</title>
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="text-center" scope="col">İade Kodu</th>
+      <th scope="col">İade Eden</th>
+      <th scope="col">İade Sebebi</th>
+      <th scope="col">Kargo Takip NO:</th>
+      <th scope="col">İade Tarihi</th>
+    </tr>
+  </thead>
+  {% if run %}
+  {%for x in run %}
+  <tbody>
+    <tr style="background:#ffff;">
+      <th class="text-center" scope="row">{{x.order_no}}</th>
+      <td>{{x.author.username}}</td>
+      <td>{{x.case}}</td>
+      <td>{{x.cargo}}</td>
+      <td>{{x.created_date}}</td>
+    </tr>
+  {% endfor%}
+    {% else %}
+  <br>
+  <div class="row justify-content-md-center"><i class="far fa-frown" style="font-size: 7.0em; color:#EB060B;"></i></div>
+  <br>
+  <p class="text-justify row justify-content-md-center">Üzgünüz Herangi Bir Ürün Alımı Yapmamışsınız.</p>
+  {% endif %}
+  </tbody>
+</table>
+
+<br>
+<br>
+{% endblock %}

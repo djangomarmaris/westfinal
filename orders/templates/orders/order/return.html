@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+        {% block seo %}
+        <title>İade Kontrol</title>
+        {% endblock %}
+{% block content %}
+
+<div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a style="color:red;" class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">%105 Müşteri Memnuniyeti</a>
+    <a style="color:red;" class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Kolay İade</a>
+    <a style="color:red;" class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">İade Koşulları</a>
+    <a style="color:red;" class="nav-item nav-link" id="nav-deneme-tab" data-toggle="tab" href="#nav-deneme" role="tab" aria-controls="nav-deneme" aria-selected="false">Sipariş Kodu</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      Müşteri Önceliği Bizim İlk İşimizdir,Asıl Amaç Sizlerin Memnuniyeti,Müşteri; her şeyimizdir:
+
+Yatırımlarımızın güvencesidir, yaptığımız işin denetçisidir, kalitemizin hakemidir, markamızın ücretsiz reklâmcısı veya tenkitçisidir.
+
+
+      Bizler Sizlere Daha İyi Hizmet Etmek İçin Buradayız.
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      İade Modelimiz Çok Kolay Aşağıdaki Formu Doldurup O an Hemen İade Prosedürünüzü  Başlata Bilirsiniz,Sipariş Kodu , İade Sebebi,Ve Bize Göndermiş Olduğunuz Kargo Takip Kodu ile iadenizi
+      hemen başlatıyoruz,müşteri sebebli herangi bir problem,zarar ve yıpranma yok ise 3-7 iş Günü içinde paranız hesabınıza yatıyor.
+  </div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+   Hiç Bir Koşulumuz Yoktur,Tüketicinin Korunması Hakkındaki Kanun gereğince, ürünün teslimat tarihinden itibaren 14 gün içinde cayma hakkınızı kullanarak sebep göstermeden iade edebilirsiniz
+  </div>
+  <div class="tab-pane fade" id="nav-deneme" role="tabpanel" aria-labelledby="nav-deneme-tab">
+      Almış Olduğunuz Ürünün Kodudur, İade Durumlarında Ürün Kodu Girmelisiniz, Ürün Koduna Ulaşmak İçin <a href="/order/take/" style="color:#EB060B;">Sipariş Kodum</a><br>
+      Ürün İadesi Yapılıcak Açık Adress : İşler İş Merkezi A blok  No :3 Marmaris/Muğla
+  </div>
+</div>
+
+<div class="container">
+<div class="row justify-content-md-center">
+        <div class="col-md-6 ">
+            <h3 class="text-center" style="size: 2em;"> İade Formu <i class="fas fa-undo-alt" style="font-size: 1.5em; color:#EB060B;"></i></h3>
+            <hr>
+            <form method = "post">
+                {% csrf_token %}
+                {{form.media}}
+                {{form|crispy}}
+
+                <button type = "submit" class = "btn btn-danger mee">İademi Başlat</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}

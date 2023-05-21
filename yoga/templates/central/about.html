@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block seo %}
+
+
+<title>Hakkımda</title>
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="" />
+
+<link rel="canonical" href=""/>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="index,follow"/>
+
+<meta name="googlebot" content="index,follow"/>
+
+<meta name="author" content="İhsan Gürol Demirtaş">
+
+<meta name="publisher" content="2020.01" />
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">{{product.name}}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="/">Ana Sayfa</a></li>
+                            <li class="current"><span>{{product.name}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <div class="about-story-area pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                {% for product in abouts %}
+                <div class="col-lg-6">
+                    <div class="story-img">
+                        <a href="#"><img src="{% static 'assets/img/banner/banner-16.png' %}" alt=""></a>
+                        <div class="about-logo">
+                            <h3 style="font-size:25px;">Defective</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="story-details pl-50">
+                        <div class="story-details-top">
+                            <h2>{{product.title}}</h2>
+                            <p>{{product.info | safe}}. </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block jss %}
+{% endblock %}

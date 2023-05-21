@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block seo %}
+
+
+<title>İletişim</title>
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="" />
+
+<link rel="canonical" href=""/>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="index,follow"/>
+
+<meta name="googlebot" content="index,follow"/>
+
+<meta name="author" content="İhsan Gürol Demirtaş">
+
+<meta name="publisher" content="2020.01" />
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">{{product.name}}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="/">Ana Sayfa</a></li>
+                            <li class="current"><span>{{product.name}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>>
+
+
+<main class="main-content-wrapper">
+            <div class="inner-page-content pt--75 pt-md--55">
+                <!-- Contact Area Start -->
+                <section class="contact-area mb--75 mb-md--55">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5 mb-sm--30">
+                                <div class="heading mb--32">
+                                    <h2>Adres</h2>
+                                    <hr class="delimeter">
+                                </div>
+                                <div class="contact-info mb--20">
+                                    <p><i class="fa fa-map-marker"></i>Kemalpaşa Organize Sanayi Bölgesi Mah. No:315 <br>Kemalpaşa/İZMİR</p>
+                                    <p><i class="fa fa-phone"></i> +90 232 342 22 66</p>
+                                    <p><i class="fa fa-fax"></i> +1-202-501-1829</p>
+                                    <p><i class="fa fa-clock-o"></i> Mon – Fri : 9:00 – 18:00</p>
+                                </div>
+                                <div class="social">
+                                    <a href="https://www.facebook.com" class="social__link">
+                                        <i class="la la-facebook"></i>
+                                    </a>
+                                    <a href="https://www.twitter.com" class="social__link">
+                                        <i class="la la-linkedin"></i>
+                                    </a>
+                                    <a href="https://www.plus.google.com" class="social__link">
+                                        <i class="la la-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-7 offset-lg-1">
+                                <div class="heading mb--40">
+                                    <h2>İletişim</h2>
+                                    <hr class="delimeter">
+                                </div>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="email" name="email"  class="form__input mb--30" placeholder="Email*">
+                                    <input type="text" name="name"  class="form__input mb--30" placeholder="İsim*">
+                                    <input type="text" name="subject" class="form__input mb--30" placeholder="Konu*">
+                                    <textarea class="form__input form__input--textarea mb--30" placeholder="Mesajınız" name="con_message"></textarea>
+                                    <button name="btnSubmit" type="submit" class="btn btn-shape-round form__submit">Send Request</button>
+                                    <div class="form__output"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+        {% if request.user.is_authenticated %}
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <div class="mini-cart__close">
+                    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+                </div>
+                <div class="mini-cart-inner">
+                    <h3 class="mini-cart__heading mb--45">Sepetim</h3>
+                    <div class="mini-cart__content">
+                        {% for item in cart %}
+                        <ul class="mini-cart__list">
+                            <li class="mini-cart__product">
+                                <div class="mini-cart__product-image">
+                                    <img src="{% if item.product.list_image %}{{ item.product.list_image.url }}{% else %}{% endif %}" alt="products">
+                                </div>
+                                <div class="mini-cart__product-content">
+                                    <a class="mini-cart__product-title" href="product-details.html">{{item.product.name}}.</a>
+                                    <span class="mini-cart__product-quantity">{{item.quantity}} x ₺ {{item.product.price}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                        <div class="mini-cart__total">
+                            <span>Genel Toplam</span>
+                            <span class="ammount">₺ {{ cart.get_total_price }}</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="/cart/" class="btn btn-fullwidth btn-bg-primary mb--20">Sepetim</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% else %}
+
+         {% endif %}
+        {% endwith %}
+        {% else %}
+        {% endif %}
+<div class="searchform__popup" id="searchForm">
+            <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+            <div class="searchform__body">
+                <p>Start typing and press Enter to search</p>
+                <form class="searchform">
+                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store...">
+                    <button type="submit" class="searchform__submit"><i class="la la-search"></i></button>
+                </form>
+            </div>
+
+                </section>
+
+
+{% endblock %}
+
+
+{% block jss %}
+{% endblock %}

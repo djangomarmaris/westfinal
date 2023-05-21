@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block seo %}
+    <title>Giriş</title>
+{% endblock %}
+
+ {% block content %}
+ {% load crispy_forms_tags %}
+
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">{{product.name}}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="/">Ana Sayfa</a></li>
+                            <li class="current"><span>{{product.name}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<div class="main-content-wrapper">
+            <div class="page-content-inner pt--75 pb--80">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 mb-sm--50">
+                            <div class="login-box">
+                                <h3 class="heading__tertiary mb--30">Login</h3>
+                                <form  method="post" class="form form--login">
+                                    {% csrf_token %}
+                                    <div class="form__group mb--20">
+                                        {{ form.username|as_crispy_field }}
+                                    </div>
+                                    <div class="form__group mb--20">
+                                       {{ form.password|as_crispy_field }}
+                                    </div>
+                                    <div class="d-flex align-items-center mb--20">
+                                        <div class="form__group mr--30">
+                                            <input type="submit" value="Log in" class="btn btn-size-sm">
+                                        </div>
+                                    </div>
+                                    <a class="forgot-pass" href="/user/register/">Hemen Üyeol?</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}

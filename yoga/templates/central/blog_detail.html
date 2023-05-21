@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block seo %}
+
+
+<title>Yayın Evi</title>
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="" />
+
+<link rel="canonical" href=""/>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="index,follow"/>
+
+<meta name="googlebot" content="index,follow"/>
+
+<meta name="author" content="İhsan Gürol Demirtaş">
+
+<meta name="publisher" content="2020.01" />
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">{{product.name}}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="/">Ana Sayfa</a></li>
+                            <li class="current"><span>{{product.title}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+<main class="main-content-wrapper">
+            <div class="inner-page-content ptb--80 ptb-md--60">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-12 mb--45">
+                                    <article class="blog format-standard">
+                                        <div class="blog__inner">
+                                            <div class="blog__media">
+                                                <figure class="image">
+                                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt="Blog" class="w-100">
+                                                    <a href="blog-details-image.html" class="item-overlay"></a>
+                                                </figure>
+                                            </div>
+                                            <div class="blog__info">
+                                                <h2 class="blog__title"><a href="blog-details-image.html">{{product.title}}.</a></h2>
+
+                                                <div class="blog__desc">
+                                                    <p>{{product.info | safe}}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% if request.user.is_authenticated %}
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <div class="mini-cart__close">
+                    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+                </div>
+                <div class="mini-cart-inner">
+                    <h3 class="mini-cart__heading mb--45">Sepetim</h3>
+                    <div class="mini-cart__content">
+                        {% for item in cart %}
+                        <ul class="mini-cart__list">
+                            <li class="mini-cart__product">
+                                <div class="mini-cart__product-image">
+                                    <img src="{% if item.product.list_image %}{{ item.product.list_image.url }}{% else %}{% endif %}" alt="products">
+                                </div>
+                                <div class="mini-cart__product-content">
+                                    <a class="mini-cart__product-title" href="product-details.html">{{item.product.name}}.</a>
+                                    <span class="mini-cart__product-quantity">{{item.quantity}} x ₺ {{item.product.price}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                        <div class="mini-cart__total">
+                            <span>Genel Toplam</span>
+                            <span class="ammount">₺ {{ cart.get_total_price }}</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="/cart/" class="btn btn-fullwidth btn-bg-primary mb--20">Sepetim</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% else %}
+
+         {% endif %}
+        {% endwith %}
+        {% else %}
+        {% endif %}
+<div class="searchform__popup" id="searchForm">
+            <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+            <div class="searchform__body">
+                <p>Start typing and press Enter to search</p>
+                <form class="searchform">
+                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store...">
+                    <button type="submit" class="searchform__submit"><i class="la la-search"></i></button>
+                </form>
+            </div>
+        </main>
+
+
+{% endblock %}
+
+
+{% block jss %}
+{% endblock %}

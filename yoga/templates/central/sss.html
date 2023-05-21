@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block seo %}
+
+
+<title>Yayın Evi</title>
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="" />
+
+<link rel="canonical" href=""/>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="index,follow"/>
+
+<meta name="googlebot" content="index,follow"/>
+
+<meta name="author" content="İhsan Gürol Demirtaş">
+
+<meta name="publisher" content="2020.01" />
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+ <section class="page-title centred">
+            <div class="pattern-layer" style="background-image: url({% static 'assets/images/background/page-title.jpg' %});"></div>
+            <div class="auto-container">
+                <div class="content-box">
+                    <h1>Sıkca Sorulan Sorular</h1>
+
+                </div>
+            </div>
+        </section>
+        <!-- page-title end -->
+
+
+        <!-- blog-details -->
+        <section class="blog-details">
+            <div class="auto-container">
+                <div class="blog-details-content">
+                    <div class="inner-box">
+
+                        <div class="text">
+                            {% for x in rules %}
+                            <p>{{x.sss | safe}}</p>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block jss %}
+{% endblock %}

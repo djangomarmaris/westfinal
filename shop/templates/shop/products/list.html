@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+   {% block seo %}
+
+
+    {% endblock %}
+{% block content %}
+<div class="small-header bg-img-custom" style="background-image: url('{% static 'banner3.jpg' %}');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Our stores are our dna</h2>
+          </div>
+          <div class="col-md-6 text-right">
+            <h4 class="breadcrumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- shop Block-->
+    <section class="section-small" id="shop">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row grid-pad">
+              <div class="col-md-8 text-center">
+                <div class="container-fluid">
+                  <div class="row">
+                    {% for product in products %}
+                    <div class="col-sm-6">
+                      <div class="shop-item">
+                        <div class="badge price">₺ {{product.price}}</div>
+                        <div class="badge price"></div><a href="{{product.get_absolute_url}}"><span class="add-cart" title="Add to cart"></span></a><a href="{{product.get_absolute_url}}"><img class="img-responsive center-block" src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt=""></a>
+                      </div><a href="{{product.get_absolute_url}}">
+                        <h5>{{product.name}}</h5></a>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-md-offset-1">
+                <hr>
+                <h4>Partners</h4>
+                <div class="row">
+                  <div class="col-md-6 col-sm-3"><a href="client-single.html"><img class="img-responsive" src="img/clients/logo.png" alt=""></a></div>
+                  <div class="col-md-6 col-sm-3"><a href="client-single.html"><img class="img-responsive" src="img/clients/logo03.png" alt=""></a></div>
+                  <div class="col-md-6 col-sm-3"><a href="client-single.html"><img class="img-responsive" src="img/clients/logo02.png" alt=""></a></div>
+                  <div class="col-md-6 col-sm-3"><a href="client-single.html"><img class="img-responsive" src="img/clients/logo04.png" alt=""></a></div>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}

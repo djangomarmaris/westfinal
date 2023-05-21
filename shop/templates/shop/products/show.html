@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+   {% block seo %}
+
+
+    {% endblock %}
+{% block content %}
+<section class="page-title-area bg-image ptb--80" data-bg-image="{% static 'back1.jpeg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title">{{product.name}}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="/">Ana Sayfa</a></li>
+                            <li class="current"><span>{{product.name}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+<div  class="main-content-wrapper">
+            <div class="shop-page-wrapper ptb--80">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="shop-toolbar mb--50">
+                                <div class="row align-items-center">
+                                    <!--div class="col-md-5 mb-sm--30 mb-xs--10">
+                                        <div class="shop-toolbar__left">
+                                            <div class="product-ordering">
+                                                <select class="product-ordering__select nice-select">
+                                                    <option value="0">Default Sorting</option>
+                                                    <option value="1">Relevance</option>
+                                                    <option value="2">Name, A to Z</option>
+                                                    <option value="3">Name, Z to A</option>
+                                                    <option value="4">Price, low to high</option>
+                                                    <option value="5">Price, high to low</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div-->
+                                    <div class="col-md-12">
+                                        <div class="shop-toolbar__right d-flex justify-content-md-end justify-content-start flex-sm-row flex-column">
+                                            <p class="product-pages">Ekran Değiştir</p>
+                                            <div class="product-view-mode ml--50 ml-xs--0">
+                                                <a class="active" href="#" data-target="grid">
+                                                    <img src="{% static 'assets/img/icons/grid.png' %}" alt="Grid">
+                                                </a>
+                                                <a href="#" data-target="list">
+                                                    <img src="{% static 'assets/img/icons/list.png' %}" alt="Grid">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-products">
+                                <div class="row">
+                                    {% for  product in products %}
+                                    <div class="col-xl-4 col-sm-6 mb--50">
+                                        <div class="ft-product">
+                                            <div class="product-inner">
+                                                <div class="product-image">
+                                                    <figure class="product-image--holder">
+                                                        <img src="{% if product.list_image %}{{ product.list_image.url }}{% else %}{% endif %}" alt="Product">
+                                                    </figure>
+                                                    <a href="{{product.get_absolute_url}}" class="product-overlay"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-category">
+                                                        <a href="product-details.html">West Design</a>
+                                                    </div>
+                                                    <h3 class="product-title"><a href="{{product.get_absolute_url}}">{{product.name}}.</a></h3>
+                                                    <div class="product-info-bottom">
+                                                        <div class="product-price-wrapper">
+                                                            <span class="money">₺ {{product.price}}</span>
+                                                        </div>
+                                                        <a href="{{product.get_absolute_url}}" class="add-to-cart pr--15">
+                                                            <i class="la la-plus"></i>
+                                                            <span>İncele</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ft-product-list">
+                                            <div class="product-inner">
+                                                <figure class="product-image">
+                                                    <a href="product-details.html">
+                                                        <img width="500" src="{% if product.list_image %}{{ product.list_image.url }}{% else %}{% endif %}" alt="Products">
+                                                    </a>
+                                                    <div class="product-thumbnail-action">
+                                                        <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn quick-view">
+                                                            <i class="la la-eye"></i>
+                                                        </a>
+                                                    </div>
+                                                </figure>
+                                                <div class="product-info">
+                                                    <h3 class="product-title mb--25">
+                                                        <a href="product-details.html">{{product.name}}</a>
+                                                    </h3>
+                                                    <div class="product-price-wrapper mb--15 mb-sm--10">
+                                                        <span class="money">₺ {{product.price}}</span>
+                                                    </div>
+                                                    <p class="product-short-description mb--20">
+                                                        {{product.info}}
+                                                    </p>
+                                                    <div class="ft-product-action-list d-flex align-items-center">
+                                                        <a href="{{product.get_absolute_url}}" class="btn btn-size-md">İncele</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <div class="mini-cart__close">
+                    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+                </div>
+                <div class="mini-cart-inner">
+                    <h3 class="mini-cart__heading mb--45">Sepetim</h3>
+                    <div class="mini-cart__content">
+                        {% for item in cart %}
+                        <ul class="mini-cart__list">
+                            <li class="mini-cart__product">
+                                <div class="mini-cart__product-image">
+                                    <img src="{% if item.product.list_image %}{{ item.product.list_image.url }}{% else %}{% endif %}" alt="products">
+                                </div>
+                                <div class="mini-cart__product-content">
+                                    <a class="mini-cart__product-title" href="product-details.html">{{item.product.name}}.</a>
+                                    <span class="mini-cart__product-quantity">{{item.quantity}} x ₺ {{item.product.price}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                        <div class="mini-cart__total">
+                            <span>Genel Toplam</span>
+                            <span class="ammount">₺ {{ cart.get_total_price }}</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="/cart/" class="btn btn-fullwidth btn-bg-primary mb--20">Sepetim</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% else %}
+
+         {% endif %}
+        {% endwith %}
+        {% else %}
+        {% endif %}
+<div class="searchform__popup" id="searchForm">
+            <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+            <div class="searchform__body">
+                <p>Start typing and press Enter to search</p>
+                <form class="searchform">
+                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store...">
+                    <button type="submit" class="searchform__submit"><i class="la la-search"></i></button>
+                </form>
+            </div>
+
+
+{% endblock %}

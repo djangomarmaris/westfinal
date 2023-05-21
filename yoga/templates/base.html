@@ -1,0 +1,66 @@
+<!doctype html>
+{% load static i18n %}
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>West Banyo</title>
+    {% block css%}
+    {% endblock%}
+
+     <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/img/icon.png">
+
+    <!-- ************************* CSS Files ************************* -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/vendor.css' %}">
+
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+
+
+
+    {% block seo %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+
+
+
+
+
+{% include "navbar.html" %}
+{% block content %}
+
+
+
+{% endblock %}
+{% include "footer.html" %}
+
+
+
+
+
+
+{% block jss %}
+
+{% endblock %}
+
+    <script src="{% static 'assets/js/vendor.js' %}"></script>
+
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>
